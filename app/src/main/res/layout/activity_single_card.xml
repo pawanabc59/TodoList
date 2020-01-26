@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/white_black"
+    tools:context=".SingleCardActivity">
+
+    <TextView
+        android:id="@+id/tvTaskDate"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:textAlignment="gravity"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="?attr/buttoncolor"
+        android:textColor="?attr/textcolor"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/showSubtaskRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/addSubTask"
+        android:layout_below="@+id/tvTaskDate"
+        android:background="?attr/cardbackground"/>
+
+    <LinearLayout
+        android:id="@+id/addSubTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <EditText
+            android:id="@+id/editAddSubTask"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:hint="Enter the subtask to add"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btnSubTaskAdd"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="?attr/white_black"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:src="@drawable/ic_send"
+                android:foregroundGravity="center_vertical"/>
+
+            <ProgressBar
+                android:id="@+id/subTaskAddProgressBar"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

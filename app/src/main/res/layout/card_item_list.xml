@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    android:background="?attr/cardbackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="?attr/textcolor">
+
+        <TextView
+            android:id="@+id/cardInsideTaskText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="?attr/textcolor"
+            android:background="?attr/cardbackground"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:foregroundGravity="center_vertical"
+            android:layout_marginBottom="1dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

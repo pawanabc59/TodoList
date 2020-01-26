@@ -1,0 +1,74 @@
+<resources>
+
+    <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+<!--        <item name="android:windowBackground">@drawable/splash_screen</item>-->
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#ffffff</item>
+        <item name="colorPrimaryDark">#212121</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionMenuTextAppearance">@color/colorAccent</item>
+        <item name="backgroundcolor">#fcfcfc</item>
+        <item name="cardbackground">#ffffff</item>
+        <item name="textcolor">#000000</item>
+        <item name="tintcolor">#808080</item>
+        <item name="buttoncolor">#2196F3</item>
+        <item name="white_black">#E6E6E6</item>
+        <item name="gray_blue">#808080</item>
+        <item name="gray_lightblue">#c2dfff</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+
+        <item name="android:itemBackground">#ffffff</item>
+        <item name="android:editTextColor">#000000</item>
+
+        <!--        this changes the popup menu text color -->
+        <item name="android:textColor">#000000</item>
+        <item name="android:textColorHint">#212121</item>
+        <!--        this is for edit text bottom line-->
+        <item name="colorControlNormal">#808080</item>
+        <item name="colorControlActivated">#2196F3</item>
+        <item name="colorControlHighlight">#2196F3</item>
+
+    </style>
+
+    <style name="darktheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimaryDark">#212121</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionMenuTextAppearance">@color/colorAccent</item>
+        <item name="backgroundcolor">#031113</item>
+        <item name="cardbackground">#424242</item>
+        <item name="textcolor">#ffffff</item>
+        <item name="tintcolor">#808080</item>
+        <item name="buttoncolor">#2196F3</item>
+        <item name="white_black">#000000</item>
+        <item name="gray_blue">#2196F3</item>
+        <item name="gray_lightblue">#c2dfff</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+
+        <item name="android:itemBackground">#212121</item>
+        <item name="android:editTextColor">#ffffff</item>
+
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColorHint">#808080</item>
+
+        <item name="colorControlNormal">#808080</item>
+        <item name="colorControlActivated">#2196F3</item>
+        <item name="colorControlHighlight">#2196F3</item>
+
+    </style>
+
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="customMaterialButtonStyle" parent="Widget.AppCompat.Button.Borderless">
+        <item name="colorAccent">#ffffff</item>
+    </style>
+
+</resources>
