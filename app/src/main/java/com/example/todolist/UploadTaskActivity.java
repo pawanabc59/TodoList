@@ -112,10 +112,29 @@ public class UploadTaskActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                editTaskDate.setText(day+"/"+(month+1)+"/"+year);
+
+                                String monthString = String.valueOf((month+1));
+                                if (monthString.length() == 1) {
+                                    monthString = "0" + monthString;
+                                }
+                                editTaskDate.setText(day+"/"+monthString+"/"+year);
+//                                String d = day+"/"+monthString+"/"+year;
+//                                Toast.makeText(getApplicationContext(), d, Toast.LENGTH_LONG).show();
                             }
                         }, year, month, dayOfMonth);
                 datePickerDialog.show();
+            }
+        });
+
+        mRef.child("tasks").child("numberOfTasks").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                numberOfTasks = dataSnapshot.getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
@@ -136,19 +155,9 @@ public class UploadTaskActivity extends AppCompatActivity {
 
                     String taskKey = mRef.push().getKey();
 
-                    mRef.child("tasks").child("numberOfTasks").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            numberOfTasks = dataSnapshot.getValue(Integer.class);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
                     mRef.child("tasks").child("taskList").child(taskKey).child("date").setValue(editDate);
-                    mRef.child("tasks").child("taskList").child(taskKey).child("subTasksList").child(taskKey).setValue(editTaskDesc);
+                    mRef.child("tasks").child("taskList").child(taskKey).child("subTasksList").child(taskKey).child("task").setValue(editTaskDesc);
+                    mRef.child("tasks").child("taskList").child(taskKey).child("subTasksList").child(taskKey).child("operation").setValue("pending");
                     mRef.child("tasks").child("taskList").child(taskKey).child("taskNumber").setValue(-(numberOfTasks+1));
                     mRef.child("tasks").child("numberOfTasks").setValue((numberOfTasks+1));
 

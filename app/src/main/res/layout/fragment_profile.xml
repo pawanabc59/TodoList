@@ -71,17 +71,17 @@
             style="@style/customMaterialButtonStyle"
             android:layout_width="@dimen/_140sdp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linear_night_mode"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_20sdp"
             android:background="@color/white"
             android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_50sdp"
             android:text="LOGOUT"
             android:textColor="@color/red"
             android:theme="@style/customMaterialButtonStyle"
             app:cornerRadius="@dimen/_20sdp"
             app:rippleColor="#33AAAAAA"
             app:strokeColor="@color/red"
+            android:layout_alignParentBottom="true"
             app:strokeWidth="2dp" />
 
     </RelativeLayout>

@@ -39,7 +39,7 @@ public class SingleCardActivity extends AppCompatActivity {
     ValueEventListener valueEventListener;
 
     SessionManager sessionManager;
-    String taskDate, subTaskKey;
+    String taskDate, TaskKey;
 
     DatabaseReference mRef;
     FirebaseUser user;
@@ -67,9 +67,9 @@ public class SingleCardActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         taskDate = intent.getExtras().getString("taskDate");
-        subTaskKey = intent.getExtras().getString("subTaskKey");
+        TaskKey = intent.getExtras().getString("subTaskKey");
 
-        mRef = FirebaseDatabase.getInstance().getReference("todo").child("users").child(userId).child("tasks").child("taskList").child(subTaskKey).child("subTasksList");
+        mRef = FirebaseDatabase.getInstance().getReference("todo").child("users").child(userId).child("tasks").child("taskList").child(TaskKey).child("subTasksList");
 
         cardSubListModels = new ArrayList<>();
         cardSubListAdapter = new CardSubListAdapter(getApplicationContext(), cardSubListModels);
@@ -89,7 +89,8 @@ public class SingleCardActivity extends AppCompatActivity {
                 }
                 else{
                     String subTaskKey = mRef.push().getKey();
-                    mRef.child(subTaskKey).setValue(strEditAddSubTask);
+                    mRef.child(subTaskKey).child("task").setValue(strEditAddSubTask);
+                    mRef.child(subTaskKey).child("operation").setValue("pending");
                     editAddSubTask.setText("");
 
                 }
@@ -103,8 +104,12 @@ public class SingleCardActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 cardSubListModels.clear();
                 for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                    cardSubListModels.add(new CardSubListModel(dataSnapshot1.getValue().toString()));
-                    cardSubListAdapter.notifyDataSetChanged();
+                    try {
+                        cardSubListModels.add(new CardSubListModel(dataSnapshot1.child("task").getValue().toString(), dataSnapshot1.child("operation").getValue().toString(), TaskKey, dataSnapshot1.getKey()));
+                        cardSubListAdapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 

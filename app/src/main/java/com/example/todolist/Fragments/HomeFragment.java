@@ -14,6 +14,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.todolist.Adapters.CardListAdapter;
 import com.example.todolist.Model.CardListModel;
@@ -27,9 +28,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HomeFragment extends Fragment {
 
@@ -46,6 +50,7 @@ public class HomeFragment extends Fragment {
     FirebaseUser user;
     String userId;
     ValueEventListener valueEventListener;
+    Query query;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,7 +75,7 @@ public class HomeFragment extends Fragment {
         user = firebaseAuth.getCurrentUser();
         userId = user.getUid();
 
-        mRef = firebaseDatabase.getReference("todo").child("users").child(userId).child("tasks").child("taskList");
+        query = firebaseDatabase.getReference("todo").child("users").child(userId).child("tasks").child("taskList").orderByChild("taskNumber");
 
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +104,7 @@ public class HomeFragment extends Fragment {
             }
         };
 
-        mRef.addValueEventListener(valueEventListener);
+        query.addValueEventListener(valueEventListener);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         homeRecyclerView.setLayoutManager(linearLayoutManager);
@@ -112,6 +117,6 @@ public class HomeFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        mRef.removeEventListener(valueEventListener);
+        query.removeEventListener(valueEventListener);
     }
 }

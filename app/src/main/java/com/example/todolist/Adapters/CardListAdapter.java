@@ -68,8 +68,12 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.ViewHo
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 cardSubListModels.clear();
                 for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                    cardSubListModels.add(new CardSubListModel(dataSnapshot1.getValue().toString()));
-                    cardSubListAdapter.notifyDataSetChanged();
+                    try {
+                        cardSubListModels.add(new CardSubListModel(dataSnapshot1.child("task").getValue().toString(), dataSnapshot1.child("operation").getValue().toString(), mList.get(position).getTaskKey(), dataSnapshot1.getKey()));
+                        cardSubListAdapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
