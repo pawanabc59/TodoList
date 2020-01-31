@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.ProfileFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/layout_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_email" />
-
-        <TextView
-            android:id="@+id/showEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/_11sdp"
-            android:gravity="center"
-            android:text="Email"
-            android:textColor="?attr/textcolor"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linear_night_mode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_text"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="@dimen/_25sdp"
-        android:paddingVertical="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Night Mode "
-            android:textColor="?attr/textcolor"
-            android:textSize="18sp"
-            android:textStyle="normal" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/night_switch"
+        <LinearLayout
+            android:id="@+id/layout_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:focusable="auto"
-            android:textOff="Off"
-            android:textOn="On"
-            app:thumbTint="?attr/gray_blue"
-            app:trackTint="?attr/gray_blue" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_email" />
+
+            <TextView
+                android:id="@+id/showEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_11sdp"
+                android:gravity="center"
+                android:text="Email"
+                android:textColor="?attr/textcolor"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_night_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_text"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/_25sdp"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Night Mode "
+                android:textColor="?attr/textcolor"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/night_switch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="auto"
+                android:textOff="Off"
+                android:textOn="On"
+                app:thumbTint="?attr/gray_blue"
+                app:trackTint="?attr/gray_blue" />
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnlogout"
             style="@style/customMaterialButtonStyle"
             android:layout_width="@dimen/_140sdp"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_50sdp"
             android:background="@color/white"
             android:padding="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_50sdp"
             android:text="LOGOUT"
             android:textColor="@color/red"
             android:theme="@style/customMaterialButtonStyle"
             app:cornerRadius="@dimen/_20sdp"
             app:rippleColor="#33AAAAAA"
             app:strokeColor="@color/red"
-            android:layout_alignParentBottom="true"
             app:strokeWidth="2dp" />
 
     </RelativeLayout>

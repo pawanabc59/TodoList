@@ -1,14 +1,14 @@
 package com.example.todolist;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.todolist.Fragments.HomeFragment;
 import com.example.todolist.Fragments.ProfileFragment;
@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
-        if (user == null){
+        if (user == null) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
-        }else {
+        } else {
 
             BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
             bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new TodayFragment();
                             break;
                         case R.id.nav_profile:
-                                selectedFragment = new ProfileFragment();
+                            selectedFragment = new ProfileFragment();
                             break;
                     }
 
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-//    this is for double click to exit the application
+    //    this is for double click to exit the application
     boolean doubleBackToExitPressedOnce = false;
 
     @Override

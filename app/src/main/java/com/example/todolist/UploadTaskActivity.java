@@ -1,8 +1,5 @@
 package com.example.todolist;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +7,9 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -72,7 +72,7 @@ public class UploadTaskActivity extends AppCompatActivity {
         mRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.hasChildren()){
+                if (!dataSnapshot.hasChildren()) {
                     mRef.child("tasks").child("numberOfTasks").setValue(0);
                 }
             }
@@ -113,11 +113,11 @@ public class UploadTaskActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                                String monthString = String.valueOf((month+1));
+                                String monthString = String.valueOf((month + 1));
                                 if (monthString.length() == 1) {
                                     monthString = "0" + monthString;
                                 }
-                                editTaskDate.setText(day+"/"+monthString+"/"+year);
+                                editTaskDate.setText(day + "/" + monthString + "/" + year);
 //                                String d = day+"/"+monthString+"/"+year;
 //                                Toast.makeText(getApplicationContext(), d, Toast.LENGTH_LONG).show();
                             }
@@ -143,13 +143,11 @@ public class UploadTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String editTaskDesc = editTaskDescription.getText().toString();
                 String editDate = editTaskDate.getText().toString();
-                if (editTaskDesc.equals("")){
+                if (editTaskDesc.equals("")) {
                     editTaskDescription.setError("Please enter task description");
-                }
-                else if (editDate.equals("")){
+                } else if (editDate.equals("")) {
                     editTaskDate.setError("Please set task Date");
-                }
-                else {
+                } else {
                     btnUploadTask.setVisibility(View.GONE);
                     uploadTaskProgressbar.setVisibility(View.VISIBLE);
 
@@ -158,8 +156,8 @@ public class UploadTaskActivity extends AppCompatActivity {
                     mRef.child("tasks").child("taskList").child(taskKey).child("date").setValue(editDate);
                     mRef.child("tasks").child("taskList").child(taskKey).child("subTasksList").child(taskKey).child("task").setValue(editTaskDesc);
                     mRef.child("tasks").child("taskList").child(taskKey).child("subTasksList").child(taskKey).child("operation").setValue("pending");
-                    mRef.child("tasks").child("taskList").child(taskKey).child("taskNumber").setValue(-(numberOfTasks+1));
-                    mRef.child("tasks").child("numberOfTasks").setValue((numberOfTasks+1));
+                    mRef.child("tasks").child("taskList").child(taskKey).child("taskNumber").setValue(-(numberOfTasks + 1));
+                    mRef.child("tasks").child("numberOfTasks").setValue((numberOfTasks + 1));
 
                     Toast.makeText(getApplicationContext(), "Task uploaded successfully", Toast.LENGTH_SHORT).show();
 
@@ -173,7 +171,7 @@ public class UploadTaskActivity extends AppCompatActivity {
         });
     }
 
-    public void pickDate(){
+    public void pickDate() {
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
@@ -182,7 +180,7 @@ public class UploadTaskActivity extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        editTaskDate.setText(day+"/"+(month+1)+"/"+year);
+                        editTaskDate.setText(day + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, dayOfMonth);
         datePickerDialog.show();

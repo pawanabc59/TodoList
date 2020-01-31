@@ -36,10 +36,11 @@ public class TodayFragment extends Fragment {
 
     RecyclerView showTodaySubtaskRecycler;
     EditText editTodayAddSubTask;
-    ImageButton btnTodaySubTaskAdd;
+    ImageButton btnTodaySubTaskAdd, btnAddFirstTaskToday;
     CardSubListAdapter cardSubListAdapter;
     ArrayList<CardSubListModel> cardSubListModels;
     ProgressBar todaySubTaskAddProgressBar;
+    TextView noTask;
 
     ValueEventListener valueEventListener, valueEventListener2, valueEventListener3;
 
@@ -79,6 +80,8 @@ public class TodayFragment extends Fragment {
         btnTodaySubTaskAdd = view.findViewById(R.id.btnTodaySubTaskAdd);
         todaySubTaskAddProgressBar = view.findViewById(R.id.todaySubTaskAddProgressBar);
         heading = view.findViewById(R.id.tvTodayTaskDate);
+        noTask = view.findViewById(R.id.noTask);
+        btnAddFirstTaskToday = view.findViewById(R.id.btnAddFirstTaskToday);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userId = user.getUid();
@@ -88,86 +91,43 @@ public class TodayFragment extends Fragment {
         cardSubListModels = new ArrayList<>();
         cardSubListAdapter = new CardSubListAdapter(getContext(), cardSubListModels);
 
-//        mRef2 = FirebaseDatabase.getInstance().getReference("to do").child("users").child(userId).child("tasks").child("taskList").child(parentTaskKey).child("subTasksList");
-
-//        valueEventListener2 = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        };
-
-//        mRef2.addValueEventListener(valueEventListener2);
-
-//        valueEventListener2 = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
-//                cardSubListModels.clear();
-//                for (DataSnapshot dataSnapshot2: dataSnapshot1.getChildren()){
-//                    try {
-//                        cardSubListModels.add(new CardSubListModel(dataSnapshot2.child("task").getValue().toString(), dataSnapshot2.child("operation").getValue().toString(), parentTaskKey, dataSnapshot2.getKey()));
-//                        cardSubListAdapter.notifyDataSetChanged();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        };
-//
-//        valueEventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-//                mRef2 = mRef.child(dataSnapshot.getKey()).child("subTasksList");
-//
-//                mRef2.addValueEventListener(valueEventListener2);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        };
-//
-//        query.addValueEventListener(valueEventListener);
-
-//        if (parentTaskKey.isEmpty()){
-//            btnTodaySubTaskAdd.setEnabled(false);
-//            Toast.makeText(getContext(), "There is no task for today.", Toast.LENGTH_SHORT).show();
-//        }
-
         valueEventListener3 = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 for (final DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 //                    Log.d(TAG, "onDataChange: It comes before the if block");
 
+                    if (!dataSnapshot1.child("date").getValue().toString().equals(currentDate)){
+                        showTodaySubtaskRecycler.setVisibility(View.GONE);
+                        noTask.setVisibility(View.VISIBLE);
+                        btnTodaySubTaskAdd.setEnabled(false);
+                        btnTodaySubTaskAdd.setVisibility(View.GONE);
+                        btnAddFirstTaskToday.setVisibility(View.VISIBLE);
+                        btnAddFirstTaskToday.setEnabled(true);
+                    }
                     if (dataSnapshot1.child("date").getValue().toString().equals(currentDate)) {
-                        parentTaskKey = dataSnapshot1.getKey();
-//                        Log.d(TAG, "onDataChange: It comes after the if block");
+                        showTodaySubtaskRecycler.setVisibility(View.VISIBLE);
+                        noTask.setVisibility(View.GONE);
+                        btnTodaySubTaskAdd.setEnabled(true);
+                        btnTodaySubTaskAdd.setVisibility(View.VISIBLE);
+                        btnAddFirstTaskToday.setEnabled(false);
+                        btnAddFirstTaskToday.setVisibility(View.GONE);
 
-//                        parentTaskKey = dataSnapshot1.child("date").getValue().toString();
-//                        heading.setText(parentTaskKey);
+                        parentTaskKey = dataSnapshot1.getKey();
+
                         mRef.child(dataSnapshot1.getKey()).child("subTasksList").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
                                 cardSubListModels.clear();
                                 for (DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
-                                    try {
-                                        cardSubListModels.add(new CardSubListModel(dataSnapshot3.child("task").getValue().toString(), dataSnapshot3.child("operation").getValue().toString(), dataSnapshot1.getKey(), dataSnapshot3.getKey()));
-                                        cardSubListAdapter.notifyDataSetChanged();
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
+
+                                        try {
+                                            cardSubListModels.add(new CardSubListModel(dataSnapshot3.child("task").getValue().toString(), dataSnapshot3.child("operation").getValue().toString(), dataSnapshot1.getKey(), dataSnapshot3.getKey()));
+                                            cardSubListAdapter.notifyDataSetChanged();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
                                 }
                             }
 
@@ -189,12 +149,6 @@ public class TodayFragment extends Fragment {
         };
 
         mRef.addValueEventListener(valueEventListener3);
-
-//        if (parentTaskKey.equals("")) {
-//            btnTodaySubTaskAdd.setEnabled(false);
-//        } else {
-//            btnTodaySubTaskAdd.setEnabled(true);
-//        }
 
         btnTodaySubTaskAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,8 +184,6 @@ public class TodayFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-//        query.removeEventListener(valueEventListener);
-//        mRef2.removeEventListener(valueEventListener2);
         mRef.removeEventListener(valueEventListener3);
     }
 }

@@ -1,10 +1,5 @@
 package com.example.todolist;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +7,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todolist.Adapters.CardSubListAdapter;
 import com.example.todolist.Model.CardSubListModel;
@@ -84,10 +83,9 @@ public class SingleCardActivity extends AppCompatActivity {
                 btnSubTaskAdd.setVisibility(View.GONE);
                 subTaskAddProgressBar.setVisibility(View.VISIBLE);
 
-                if (strEditAddSubTask.equals("")){
+                if (strEditAddSubTask.equals("")) {
                     editAddSubTask.setError("Please enter task to add");
-                }
-                else{
+                } else {
                     String subTaskKey = mRef.push().getKey();
                     mRef.child(subTaskKey).child("task").setValue(strEditAddSubTask);
                     mRef.child(subTaskKey).child("operation").setValue("pending");
@@ -103,7 +101,7 @@ public class SingleCardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 cardSubListModels.clear();
-                for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     try {
                         cardSubListModels.add(new CardSubListModel(dataSnapshot1.child("task").getValue().toString(), dataSnapshot1.child("operation").getValue().toString(), TaskKey, dataSnapshot1.getKey()));
                         cardSubListAdapter.notifyDataSetChanged();

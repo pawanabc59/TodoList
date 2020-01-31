@@ -17,12 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="?attr/textcolor"
+            android:layout_marginBottom="1dp"
             android:background="?attr/cardbackground"
-            android:textSize="16sp"
-            android:gravity="center_vertical"
             android:foregroundGravity="center_vertical"
-            android:layout_marginBottom="1dp"/>
+            android:gravity="center_vertical"
+            android:textColor="?attr/textcolor"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

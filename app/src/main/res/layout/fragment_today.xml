@@ -9,21 +9,34 @@
         android:id="@+id/tvTodayTaskDate"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
-        android:textAlignment="gravity"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="Today's Task"
         android:background="?attr/buttoncolor"
-        android:textColor="#ffffff"/>
+        android:gravity="center"
+        android:text="Today's Task"
+        android:textAlignment="gravity"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/showTodaySubtaskRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/addSubTask"
+        android:layout_above="@+id/addTodaySubTask"
         android:layout_below="@+id/tvTodayTaskDate"
-        android:background="?attr/cardbackground"/>
+        android:background="?attr/cardbackground" />
+
+    <TextView
+        android:id="@+id/noTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:text="There is no task for today. To add task add it from home."
+        android:textColor="?attr/textcolor"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/addTodaySubTask"
@@ -35,7 +48,7 @@
             android:id="@+id/editTodayAddSubTask"
             android:layout_width="@dimen/_260sdp"
             android:layout_height="@dimen/_50sdp"
-            android:hint="Enter the subtask to add today"/>
+            android:hint="Enter the subtask to add today" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -46,10 +59,21 @@
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:background="?attr/white_black"
+                android:foregroundGravity="center_vertical"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:src="@drawable/ic_send" />
+
+            <ImageButton
+                android:id="@+id/btnAddFirstTaskToday"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="?attr/white_black"
+                android:foregroundGravity="center_vertical"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 android:src="@drawable/ic_send"
-                android:foregroundGravity="center_vertical"/>
+                android:visibility="gone" />
 
             <ProgressBar
                 android:id="@+id/todaySubTaskAddProgressBar"
