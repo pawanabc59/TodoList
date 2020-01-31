@@ -119,7 +119,11 @@ public class UploadTaskActivity extends AppCompatActivity {
                                 if (monthString.length() == 1) {
                                     monthString = "0" + monthString;
                                 }
-                                editTaskDate.setText(day + "/" + monthString + "/" + year);
+                                String dayString = String.valueOf(day);
+                                if (dayString.length() == 1) {
+                                    dayString = "0" + dayString;
+                                }
+                                editTaskDate.setText(dayString + "/" + monthString + "/" + year);
 //                                String d = day+"/"+monthString+"/"+year;
 //                                Toast.makeText(getApplicationContext(), d, Toast.LENGTH_LONG).show();
                             }
