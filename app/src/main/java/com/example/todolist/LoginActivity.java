@@ -137,6 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                                         e.printStackTrace();
                                         mRef2.child("profileImage").setValue("null");
                                     }
+                                    mRef2.child("tasks").child("numberOfTasks").setValue(0);
                                     loginProgressBar.setVisibility(View.GONE);
                                     btnLogin.setVisibility(View.VISIBLE);
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);

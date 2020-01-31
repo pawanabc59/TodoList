@@ -1,6 +1,8 @@
 package com.example.todolist;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -123,6 +125,8 @@ public class UploadTaskActivity extends AppCompatActivity {
                             }
                         }, year, month, dayOfMonth);
                 datePickerDialog.show();
+                datePickerDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLUE);
+                datePickerDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.BLUE);
             }
         });
 

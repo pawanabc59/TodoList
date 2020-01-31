@@ -36,6 +36,7 @@
         android:textColor="?attr/textcolor"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:layout_marginHorizontal="@dimen/_50sdp"
         android:visibility="gone" />
 
     <LinearLayout

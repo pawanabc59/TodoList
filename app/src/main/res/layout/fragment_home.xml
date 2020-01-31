@@ -17,7 +17,23 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="4dp"
-            android:background="?attr/white_black" />
+            android:background="?attr/white_black"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/emptyHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="@dimen/_50sdp"
+            android:text="Add your tasks to view them here"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="?attr/textcolor"
+            android:visibility="visible"
+            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnAddTask"

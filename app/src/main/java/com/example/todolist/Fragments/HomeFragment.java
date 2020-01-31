@@ -14,6 +14,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.todolist.Adapters.CardListAdapter;
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment {
     CardListAdapter cardListAdapter;
     ArrayList<CardListModel> cardListModels;
     FloatingActionButton btnAddTask;
+    TextView emptyHome;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference mRef;
@@ -69,6 +71,7 @@ public class HomeFragment extends Fragment {
 
         homeRecyclerView = view.findViewById(R.id.homeRecyclerView);
         btnAddTask = view.findViewById(R.id.btnAddTask);
+        emptyHome = view.findViewById(R.id.emptyHome);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -91,10 +94,19 @@ public class HomeFragment extends Fragment {
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cardListModels.clear();
-                for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                    cardListModels.add(new CardListModel(dataSnapshot1.child("date").getValue().toString(), dataSnapshot1.getKey()));
-                    cardListAdapter.notifyDataSetChanged();
+
+                if (!dataSnapshot.hasChildren()){
+                    homeRecyclerView.setVisibility(View.GONE);
+                    emptyHome.setVisibility(View.VISIBLE);
+                }
+                else {
+                    emptyHome.setVisibility(View.GONE);
+                    homeRecyclerView.setVisibility(View.VISIBLE);
+                    cardListModels.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        cardListModels.add(new CardListModel(dataSnapshot1.child("date").getValue().toString(), dataSnapshot1.getKey()));
+                        cardListAdapter.notifyDataSetChanged();
+                    }
                 }
             }
 
